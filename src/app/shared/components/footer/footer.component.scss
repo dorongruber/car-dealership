@@ -1,0 +1,11 @@
+footer {
+    height: var(--mat-toolbar-standard-height);
+    background: aqua;
+}
+
+@media (max-width: 599px)
+{
+    footer {
+        height: var(--mat-toolbar-mobile-height);
+    }
+}

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {path: '', redirectTo: 'landing', pathMatch: 'full'},
-  {path: 'landing', loadChildren: () => import("./landing/landing.module").then(m => m.LandingModule) },
+  {path: 'landing', loadChildren: () => import("./car-request/car-request.module").then(m => m.CarRequestModule) },
 ];
 
 @NgModule({

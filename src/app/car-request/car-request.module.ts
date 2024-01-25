@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { MainComponent } from './routes/main/main.component';
 import { FormComponent } from './components/form/form.component';
-import { LandingRoutingModule } from './landing-routing.module';
+import { CarRequesRoutingModule } from './car-request-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { TextInputComponent } from './components/text-input/text-input.component';
 import { DatepickerInputComponent } from './components/datepicker-input/datepicker-input.component';
@@ -42,7 +42,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
   ],
   imports: [
     CommonModule,
-    LandingRoutingModule,
+    CarRequesRoutingModule,
     ReactiveFormsModule,
     SharedModule,
     MatInputModule,
@@ -59,4 +59,4 @@ import { DialogComponent } from './components/dialog/dialog.component';
     NativeDateAdapter,
   ]
 })
-export class LandingModule { }
+export class CarRequestModule { }

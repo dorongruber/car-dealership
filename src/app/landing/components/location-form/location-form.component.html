@@ -1,41 +1,24 @@
-<!-- <ng-container [formGroup]="parentForm">
-    
-    <fieldset [formGroupName]="childFromName">
-        <legend>{{"location"}}</legend>
-            <app-text-input 
-            [parentForm]="childFrom" 
-            [controlName]="'address'" 
-            [label]="'address'"
-            [placeholder]="'enter address'"></app-text-input>
-            <app-text-input 
-            [parentForm]="childFrom" 
-            [controlName]="'city'"
-            [label]="'city'"
-            [placeholder]="'enter city'"></app-text-input>
-            <app-text-input 
-            [parentForm]="childFrom" 
-            [controlName]="'contry'"
-            [label]="'contry'"
-            placeholder="'enter contry"></app-text-input>
-    </fieldset>
-</ng-container> -->
 <ng-container [formGroup]="parentForm">
-    <h1>Location:</h1>
+    <h2>Location:</h2>
     <section [formGroupName]="childFromName">
-        <app-text-input 
-        [parentForm]="childFrom" 
-        [controlName]="'address'" 
-        [label]="'address'"
-        [placeholder]="'enter address'"></app-text-input>
+        
         <app-text-input 
         [parentForm]="childFrom" 
         [controlName]="'city'"
         [label]="'city'"
         [placeholder]="'enter city'"></app-text-input>
+
         <app-text-input 
         [parentForm]="childFrom" 
         [controlName]="'contry'"
         [label]="'contry'"
         placeholder="'enter contry"></app-text-input>
+
+        <app-text-input 
+        [parentForm]="childFrom" 
+        [controlName]="'address'" 
+        [label]="'address'"
+        [placeholder]="'enter address'"></app-text-input>
+
     </section>
 </ng-container>

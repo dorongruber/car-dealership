@@ -1,0 +1,71 @@
+<app-header></app-header>
+<section>
+    <div class="about">
+        <hgroup>
+            <h1>{{ "Welcome to CarMatch AI " | uppercase}}</h1>
+            <h3>{{ "Discover the Future of Car Ownership" | lowercase}}</h3>
+        </hgroup>
+
+        <ul>
+            <li>
+                <p>
+                    At CarMatch AI, we're revolutionizing the way you find your perfect car. 
+                </p>
+            </li>
+            <li>
+                <p>
+                    Our cutting-edge artificial intelligence model is designed to understand you - your preferences, your lifestyle, and your aspirations.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Say goodbye to the hassle of browsing through countless options.
+                </p>
+            </li>
+            <li>
+                <p>
+                    our AI is here to match you with the car that perfectly suits you.
+                </p>
+            </li>
+        </ul>
+        
+        
+        
+        
+        
+        
+    </div>
+    <div class="content">
+
+        <div class="description">
+            <h2>How It Works:</h2>
+            <ol>
+                <li>
+                    <p><strong>Tell Us About You:</strong> Fill out a simple form with your preferences and details.</p>
+                </li>
+                <li>
+                    <p><strong>AI Magic:</strong> Our advanced AI processes your information to understand your unique needs.</p>
+                </li>
+                <li>
+                    <p><strong>Your Perfect Match:</strong> Receive a tailored recommendation for the car that aligns with your lifestyle and budget.</p>
+                </li>
+            </ol>
+            <p>No more guesswork. No more compromise. Experience the future of car buying with CarMatch AI.</p>
+            <p>Ready to find your ideal ride? Let's get started!</p>
+        </div>
+        <div class="actions">
+            <mat-card [routerLink]="['../car-request']">
+                <mat-card-content>
+                    <h4>Get Matched Now</h4>
+                </mat-card-content>
+            </mat-card>
+    
+            <mat-card [routerLink]="['../dashboard']">
+                <mat-card-content>
+                    <h4>dashboard</h4>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

@@ -1,0 +1,11 @@
+.hobby-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+.icons-container {
+    display: flex;
+    gap: 15;
+}

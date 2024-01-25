@@ -1,0 +1,17 @@
+section {
+    display: flex;
+    column-gap: 12px;
+    // row-gap: 10px;
+    // border: 1px solid black;
+    // border-radius: 16px;
+    padding: 0px 16px 1em 16px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    width: fit-content;
+}
+
+h1 {
+    margin-block-start: 1em;
+    margin-block-end: 0;
+}
+

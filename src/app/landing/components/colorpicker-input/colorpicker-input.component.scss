@@ -1,0 +1,29 @@
+.colorpicker-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50px;
+    background-color: transparent;
+    &:hover {
+        cursor: pointer;
+        
+    }
+}
+
+input[type=color] {
+    width: 29px;
+    block-size: 32px;
+    border-color: transparent;
+    padding: 0;
+    box-sizing: border-box;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &::-webkit-color-swatch {
+        border-radius: 50%;
+    }
+}

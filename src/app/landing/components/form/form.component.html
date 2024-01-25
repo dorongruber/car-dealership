@@ -1,1 +1,75 @@
-<form></form>
+<section>
+    <app-header></app-header>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+        
+        <div>
+            <h2>personal information</h2>
+            <div class="container">
+                <app-text-input 
+                [parentForm]="form" 
+                [controlName]="'fullName'"
+                ></app-text-input>
+            
+                <app-datepicker-input 
+                [parentForm]="form" 
+                [childFromName]="'birthDate'"
+                ></app-datepicker-input>
+                
+                <app-option-select 
+                [parentForm]="form"
+                [label]="'gender'"
+                [childFromName]="'gender'" 
+                [options]="genders" 
+                [isMultiSelect]="false"
+                ></app-option-select>
+
+                <app-hobbies 
+                [parentForm]="form"
+                [childFromName]="'hobbies'"
+                ></app-hobbies>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+    
+        <app-location-form 
+        [parentForm]="form"
+        [childFromName]="'location'"
+        ></app-location-form>
+
+        <mat-divider></mat-divider>
+        
+        <div>
+            <h2>preferences</h2>
+            <div class="container">
+                <app-option-select 
+                [parentForm]="form"
+                [label]="'number of seats'"
+                [childFromName]="'seats'" 
+                [options]="seats" 
+                [isMultiSelect]="false"
+                ></app-option-select>
+            
+                <app-option-select 
+                [parentForm]="form"
+                [label]="'motor type'"
+                [childFromName]="'motorType'" 
+                [options]="motors" 
+                [isMultiSelect]="true"
+                ></app-option-select>
+            
+                <app-colorpicker-input 
+                [parentForm]="form"
+                [label]="'favorite Color'"
+                [childFromName]="'favoriteColor'"
+                ></app-colorpicker-input>
+            </div>
+        </div>
+    
+        <button 
+        type="submit"
+        mat-raised-button
+        color="primary"
+        > submit </button>
+    </form>
+</section>

@@ -1,0 +1,32 @@
+section {
+    
+    min-width: 300px;
+    max-width: 720px;
+    border: 1px solid rgb(165, 106, 29);
+    border-radius: 16px;
+    background-color: white;
+    margin: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 16px;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+.container {
+    display: inherit;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+:host ::ng-deep app-header mat-toolbar{
+    border-top-left-radius: 16px !important;
+    border-top-right-radius: 16px !important;
+}
+
+:host ::ng-deep mat-divider {
+    border-top-color: gray;
+}

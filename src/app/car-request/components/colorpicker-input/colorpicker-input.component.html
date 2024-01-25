@@ -1,9 +1,9 @@
 <ng-container [formGroup]="parentForm">
     <mat-form-field>
         <mat-label> {{ label}} </mat-label>
-        <input matInput [value]="colorPicker.value" readonly="true">
+        <input matInput [appColorPicker]="control" [value]="colorPicker.value" readonly="true">
         <div matSuffix class="colorpicker-container">
-            <input type="color" [formControlName]="childFromName" #colorPicker >
+            <input type="color" [formControl]="control" #colorPicker >
         </div> 
         <mat-error>{{ label }} is required </mat-error>
     </mat-form-field>

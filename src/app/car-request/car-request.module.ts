@@ -26,6 +26,7 @@ import { InrangeSelectComponent } from './components/inrange-select/inrange-sele
 import { OptionSelectComponent } from './components/option-select/option-select.component';
 import { ColorpickerInputComponent } from './components/colorpicker-input/colorpicker-input.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { ColorPickerDirective } from './directives/color-picker.directive';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     MatDividerModule,
     MatSelectModule,
     MatChipsModule,
+    ColorPickerDirective
   ],
   providers: [
     NativeDateAdapter,

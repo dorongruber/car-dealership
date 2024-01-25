@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 
 @Component({
@@ -7,9 +7,14 @@ import { ThemePalette } from '@angular/material/core';
   templateUrl: './colorpicker-input.component.html',
   styleUrls: ['./colorpicker-input.component.scss']
 })
-export class ColorpickerInputComponent {
+export class ColorpickerInputComponent implements OnChanges {
   @Input() parentForm!: FormGroup;
   @Input() childFromName!: string;
   @Input() label!: string;
   color: ThemePalette = 'primary';
+
+  control!: FormControl;
+  ngOnChanges(changes: SimpleChanges): void {
+      this.control = this.parentForm.controls[this.childFromName] as FormControl;
+  }
 }

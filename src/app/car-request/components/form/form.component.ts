@@ -15,6 +15,7 @@ import {
   hobbyMinLength } from '../../consts/fields-restraints';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { MockCarRequestService } from 'src/app/shared/services/mock-car-request.service';
 
 
 @Component({
@@ -27,26 +28,24 @@ export class FormComponent {
   genders = genderOptions;
   motors = motorOptions;
   seats = seatOptions;
-  constructor(private fb: FormBuilder,private dialog: MatDialog) {
+
+  constructor(private fb: FormBuilder, 
+    private dialog: MatDialog,
+    private carRequestService: MockCarRequestService) {
     this.form = this.fb.group({
-      fullName: this.fb.control("", [Validators.min(fullNameMinLength), Validators.max(fullNameMaxLength), Validators.required]),
-      birthDate: this.fb.control(Date.now(), [Validators.required]),
-      gender: this.fb.control("male", [Validators.required]),
+      fullName: this.fb.control<string>("", [Validators.min(fullNameMinLength), Validators.max(fullNameMaxLength), Validators.required]),
+      birthDate: this.fb.control<string>("", [Validators.required]),
+      gender: this.fb.control<string>(this.genders[0].value as string, [Validators.required]),
       location: this.fb.group({
-        address: this.fb.control("", [Validators.required, Validators.min(addressMinLength), Validators.max(addressMaxLength)]),
-        city: this.fb.control("", [Validators.required, Validators.min(cityMinLength), Validators.max(cityMaxLength)]),
-        contry: this.fb.control("", [Validators.required, Validators.min(contryMinLength), Validators.max(contryMaxLength)]),
+        address: this.fb.control<string>("", [Validators.required, Validators.min(addressMinLength), Validators.max(addressMaxLength)]),
+        city: this.fb.control<string>("", [Validators.required, Validators.min(cityMinLength), Validators.max(cityMaxLength)]),
+        contry: this.fb.control<string>("", [Validators.required, Validators.min(contryMinLength), Validators.max(contryMaxLength)]),
       }),
-      // hobbies: this.fb.array([
-      //   this.fb.group({
-      //     hobby: this.fb.control("", [Validators.required, Validators.min(hobbyMinLength), Validators.max(hobbyMaxLength)])
-      //   })
-      // ], [Validators.required, Validators.min(hobbiesMinLength)]),
-      hobbies: this.fb.control([''], [Validators.required]),
-      favoriteColor: this.fb.control("", [Validators.required]),
-      seats: this.fb.control("", [Validators.required]),
-      motorType: this.fb.control("", [Validators.required])
-    })
+      hobbies: this.fb.control<string[]>([], [Validators.required]),
+      favoriteColor: this.fb.control<string>("", [Validators.required]),
+      seats: this.fb.control<number>(this.seats[0].value as number, [Validators.required]),
+      motorType: this.fb.control([this.motors[0].value as string], [Validators.required])
+    });
   }
 
   openDialog() {
@@ -58,16 +57,14 @@ export class FormComponent {
   }
 
   onSubmit(form: FormGroup) {
-    console.log("form.invalid ==> ", form.controls);
-    this.openDialog();
+    console.log("form.invalid ==> ", form.value);
     if(form.invalid) {
-      Object.keys(this.form.controls).forEach(field => { 
-        const control = this.form.get(field)!;            
-        control.markAsTouched({ onlySelf: true });       
-      });
+      form.markAllAsTouched();
       return;
     }
-    console.log("valid form ==> ", form);
-    // this.openDialog();
+    this.carRequestService.post(form.value);
+    // console.log("valid form ==> ", form.value);
+    
+    this.openDialog();
   }
 }

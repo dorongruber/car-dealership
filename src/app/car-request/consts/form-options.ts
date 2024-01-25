@@ -1,3 +1,25 @@
-export const genderOptions: string[] = ["male", "female"];
-export const motorOptions: string[] = ["electric", "fuel"];
-export const seatOptions: string[] = ["2","3","4","5","6","7"];
+export class SelectOption {
+    value: string | number;
+    constructor(value: string | number) {
+        this.value = value;
+    }
+}
+
+export const genderOptions: SelectOption[] = [
+    new SelectOption("male"), 
+    new SelectOption("female")
+];
+
+export const motorOptions: SelectOption[] = [
+    new SelectOption("electric"), 
+    new SelectOption("fuel")
+];
+
+export const seatOptions: SelectOption[] = [
+    new SelectOption(2), 
+    new SelectOption(3),
+    new SelectOption(4), 
+    new SelectOption(5),
+    new SelectOption(6), 
+    new SelectOption(7),
+];

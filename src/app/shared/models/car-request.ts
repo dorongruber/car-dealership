@@ -1,35 +1,46 @@
-interface Adapter {
-    
-}
-
 export class CarRequest {
     fullName: string;
-    email: string;
+    gender: string;
     birthDay: Date;
-    hobbies: Hobby[];
+    hobbies: string[];
+    location: Location;
     favoriteColor: string;
-    amoutOfSeats: string;
-    motor: Motor;
+    amoutOfSeats: number;
+    motors: string[];
 
-    constructor(fullName: string,
-        email: string,
+    constructor(
+        fullName: string,
+        gender: string,
         birthDay: Date,
-        hobbies: Hobby[],
+        hobbies: string[],
+        location: Location,
         favoriteColor: string,
-        amoutOfSeats: string,
-        motor: Motor,) 
+        amoutOfSeats: number,
+        motors: string[],) 
         {
             this.fullName = fullName;
-            this.email = email;
+            this.gender = gender;
             this.birthDay = birthDay;
             this.hobbies = hobbies;
+            this.location = location;
             this.favoriteColor = favoriteColor;
             this.amoutOfSeats = amoutOfSeats;
-            this.motor = motor;
+            this.motors = motors;
         }
     
 
-    
+    public static fromJson(json: {[key: string]: any}) {
+        return new CarRequest(
+            json["fullName"],
+            json["gender"],
+            json["birthDate"],
+            json["hobbies"],
+            Location.fromJson(json["location"]),
+            json["favoriteColor"],
+            json["seats"],
+            json["motorType"],
+        )
+    }
 }
 
 export class Location {
@@ -45,21 +56,12 @@ export class Location {
             this.city = city;
             this.contry = contry;
         }
-
-}
-
-export class Hobby {
-    description: string;
-
-    constructor(description: string,) {
-        this.description = description;
-    }
-}
-
-export class Motor {
-    type: string;
-
-    constructor(type: string) {
-        this.type = type;
-    }
+        
+    public static fromJson(json: {[key: string]: any}) {
+        return new Location(
+            json["address"],
+            json["city"],
+            json["contry"],
+        );
+    }   
 }

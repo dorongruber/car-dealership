@@ -54,13 +54,13 @@
             <p>Ready to find your ideal ride? Let's get started!</p>
         </div>
         <div class="actions">
-            <mat-card [routerLink]="['../car-request']">
+            <mat-card (click)="goto('../car-request')" >
                 <mat-card-content>
                     <h4>Get Matched Now</h4>
                 </mat-card-content>
             </mat-card>
     
-            <mat-card [routerLink]="['../dashboard']">
+            <mat-card (click)="gotoDashboard('../dashboard')">
                 <mat-card-content>
                     <h4>dashboard</h4>
                 </mat-card-content>

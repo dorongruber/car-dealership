@@ -1,0 +1,24 @@
+<!--dash.component.html-->
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="{{ ( cards | async )?.columns }}" rowHeight="200px">
+    <!--Mini Cards-->
+    <mat-grid-tile *ngFor="let i of [1, 2, 3, 4]" [colspan]="( cards | async )?.miniCard!.cols"
+      [rowspan]="( cards | async )?.miniCard?.rows">
+      <app-card title="Card {{i}}"><div>Mini Card Content Here</div></app-card>
+    </mat-grid-tile>
+    <!--Charts-->
+    <mat-grid-tile *ngFor="let i of [5, 6, 7, 8]" [colspan]="( cards | async )?.chart!.cols"
+      [rowspan]="( cards | async )?.chart!.rows">
+      <app-card title="Card {{i}}">
+        <app-bar-chart></app-bar-chart>
+      </app-card>
+    </mat-grid-tile>
+    <!--Table-->
+    <mat-grid-tile [colspan]="( cards | async )?.table!.cols" [rowspan]="( cards | async )?.table!.rows">
+      <app-card title="Card 9">
+        <app-orders-table></app-orders-table>
+      </app-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+ </div>

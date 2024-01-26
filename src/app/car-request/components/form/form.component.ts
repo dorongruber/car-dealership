@@ -33,7 +33,7 @@ export class FormComponent {
     private dialog: MatDialog,
     private carRequestService: MockCarRequestService) {
     this.form = this.fb.group({
-      fullName: this.fb.control<string>("", [Validators.min(fullNameMinLength), Validators.max(fullNameMaxLength), Validators.required]),
+      name: this.fb.control<string>("", [Validators.min(fullNameMinLength), Validators.max(fullNameMaxLength), Validators.required]),
       birthDate: this.fb.control<string>("", [Validators.required]),
       gender: this.fb.control<string>(this.genders[0].value as string, [Validators.required]),
       location: this.fb.group({
@@ -44,7 +44,7 @@ export class FormComponent {
       hobbies: this.fb.control<string[]>([], [Validators.required]),
       favoriteColor: this.fb.control<string>("", [Validators.required]),
       seats: this.fb.control<number>(this.seats[0].value as number, [Validators.required]),
-      motorType: this.fb.control([this.motors[0].value as string], [Validators.required])
+      motor: this.fb.control<string>(this.motors[0].value as string, [Validators.required])
     });
   }
 

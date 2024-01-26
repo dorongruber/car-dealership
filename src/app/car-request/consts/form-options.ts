@@ -12,7 +12,9 @@ export const genderOptions: SelectOption[] = [
 
 export const motorOptions: SelectOption[] = [
     new SelectOption("electric"), 
-    new SelectOption("fuel")
+    new SelectOption("Gasoline"),
+    new SelectOption("Hybrid"), 
+    new SelectOption("Diesel"),
 ];
 
 export const seatOptions: SelectOption[] = [

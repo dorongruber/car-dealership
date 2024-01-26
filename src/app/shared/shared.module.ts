@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatCardModule} from '@angular/material/card';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -17,12 +18,14 @@ import { FooterComponent } from './components/footer/footer.component';
   imports: [
     CommonModule,
     MatToolbarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule
   ]
 })
 export class SharedModule { }

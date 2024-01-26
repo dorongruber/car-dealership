@@ -1,0 +1,74 @@
+<div class="mat-elevation-z8 small-table">
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">{{row.name}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Gender</th>
+      <td mat-cell *matCellDef="let row">{{row.gender}}</td>
+    </ng-container>
+
+    <!-- birth date Column -->
+    <ng-container matColumnDef="birth date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>birth date</th>
+      <td mat-cell *matCellDef="let row">{{row.birthDay | date:"MM/dd/yyyy"}}</td>
+    </ng-container>
+
+    <!-- hobbies Column -->
+    <ng-container matColumnDef="hobbies">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Hobbies</th>
+      <td mat-cell *matCellDef="let row">{{row.hobbies}}</td>
+    </ng-container>
+
+    <!-- address Column -->
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+      <td mat-cell *matCellDef="let row">{{row.location.address}}</td>
+    </ng-container>
+
+    <!-- city Column -->
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+      <td mat-cell *matCellDef="let row">{{row.location.city}}</td>
+    </ng-container>
+
+    <!-- contry Column -->
+    <ng-container matColumnDef="contry">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Contry</th>
+      <td mat-cell *matCellDef="let row">{{row.location.contry}}</td>
+    </ng-container>
+
+    <!-- favorite color Column -->
+    <ng-container matColumnDef="favorite color">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Color</th>
+      <td mat-cell *matCellDef="let row">{{row.favoriteColor}}</td>
+    </ng-container>
+
+    <!-- amount of seats Column -->
+    <ng-container matColumnDef="amount of seats">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Seats</th>
+      <td mat-cell *matCellDef="let row">{{row.amoutOfSeats}}</td>
+    </ng-container>
+
+    <!-- motor type Column -->
+    <ng-container matColumnDef="motor type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Motor type</th>
+      <td mat-cell *matCellDef="let row">{{row.motor}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+      [length]="dataLength"
+      [pageIndex]="0"
+      [pageSize]="10"
+      [pageSizeOptions]="[10, 15, 20]"
+      aria-label="Select page">
+  </mat-paginator>
+</div>

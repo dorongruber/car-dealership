@@ -4,7 +4,6 @@ import { MainComponent } from './routes/main/main.component';
 import { LandingRoutingModule } from './landing-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
-import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -15,7 +14,7 @@ import {MatCardModule} from '@angular/material/card';
     CommonModule,
     LandingRoutingModule,
     SharedModule,
-    MatCardModule
+    
   ]
 })
 export class LandingModule { }

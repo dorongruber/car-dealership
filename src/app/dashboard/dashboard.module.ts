@@ -21,6 +21,9 @@ import { OrdersTableComponent } from './components/orders-table/orders-table.com
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+import { DynamicChartLoaderComponent } from './components/dynamic-chart-loader/dynamic-chart-loader.component';
+import { PopulateChartService } from './services/populate-chart.service';
 
 
 
@@ -32,6 +35,8 @@ import { MatSortModule } from '@angular/material/sort';
     CardComponent,
     BarChartComponent,
     OrdersTableComponent,
+    PieChartComponent,
+    DynamicChartLoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -47,6 +52,9 @@ import { MatSortModule } from '@angular/material/sort';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule
+  ],
+  providers: [
+    PopulateChartService
   ]
 })
 export class DashboardModule { }

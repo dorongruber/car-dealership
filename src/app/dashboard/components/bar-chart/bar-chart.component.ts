@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
+import { BarChartData } from '../../models/bar-chart-data';
 
 @Component({
   selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.scss']
 })
-export class BarChartComponent {
+export class BarChartComponent implements OnChanges {
   public barChartOptions: ChartOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -23,5 +24,16 @@ export class BarChartComponent {
     ]
   };
 
+  @Input()
+  chartData!: BarChartData;
   constructor() {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("changes ==> ", changes);
+    
+      this.barChartData = {
+        labels: this.chartData.labels,
+        datasets: this.chartData.datasets.map(dataset => ({data: dataset.data, label: dataset.label}))
+      }
+  }
 }

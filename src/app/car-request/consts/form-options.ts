@@ -7,7 +7,8 @@ export class SelectOption {
 
 export const genderOptions: SelectOption[] = [
     new SelectOption("male"), 
-    new SelectOption("female")
+    new SelectOption("female"),
+    new SelectOption("Non-binary"),
 ];
 
 export const motorOptions: SelectOption[] = [

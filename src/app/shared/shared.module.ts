@@ -7,13 +7,15 @@ import {MatCardModule} from '@angular/material/card';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ComponenRefDirective } from './directives/container-ref.directive';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ComponenRefDirective
   ],
   imports: [
     CommonModule,
@@ -24,6 +26,7 @@ import { FooterComponent } from './components/footer/footer.component';
   exports: [
     HeaderComponent,
     FooterComponent,
+    ComponenRefDirective,
     MatDialogModule,
     MatCardModule
   ]

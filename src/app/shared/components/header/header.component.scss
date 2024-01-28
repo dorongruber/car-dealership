@@ -1,0 +1,10 @@
+span {
+    font-family: Workbench-Regular !important;
+    color: var(--app-accent-900);
+    font-size: larger;
+}
+
+:host mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+}

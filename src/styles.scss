@@ -1,7 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-:root {
-  --primary-color: #3f51b5;
+@import 'generate-material-colors';
+@include generate-material-classes();
+
+@font-face {
+  font-family: "Workbench-Regular";
+  src: url("./assets/fonts/Workbench-Regular.ttf");
 }
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -17,7 +22,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
+  background: var(--app-primary-500);
 }
 
 /* Handle on hover */

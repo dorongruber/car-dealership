@@ -1,7 +1,14 @@
 <mat-sidenav-container>
     <mat-sidenav>Start</mat-sidenav>
     <mat-sidenav-content>
-        <app-header></app-header>
+        <app-header [title]="'CarMatch AI'">
+            <div class="buttons-container">
+                <button mat-stroked-button  (click)="goto('../')">
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>{{"logout" | titlecase}}</span>
+                </button>
+            </div> 
+        </app-header>
         <app-dashboard-layout></app-dashboard-layout>
     </mat-sidenav-content>
     </mat-sidenav-container>

@@ -1,5 +1,5 @@
 <section>
-    <app-header></app-header>
+    <app-header [title]="'New Car Requst'"></app-header>
     <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
         
         <div>
@@ -67,6 +67,7 @@
         </div>
     
         <button 
+        [disabled]="form.invalid"
         type="submit"
         mat-raised-button
         color="primary"

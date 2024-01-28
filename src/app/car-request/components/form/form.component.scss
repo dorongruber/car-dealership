@@ -22,6 +22,10 @@ form {
     gap: 10px 8px;
 }
 
+button {
+    width: 150px;
+}
+
 :host ::ng-deep app-header mat-toolbar{
     border-top-left-radius: 16px !important;
     border-top-right-radius: 16px !important;
@@ -30,3 +34,18 @@ form {
 :host ::ng-deep mat-divider {
     border-top-color: gray;
 }
+
+::ng-deep app-text-input, 
+app-datepicker-input, 
+app-option-select, 
+app-hobbies, 
+app-location-form, 
+app-option-select, 
+app-colorpicker-input {
+    flex: 1 1 auto !important;
+}
+
+::ng-deep mat-form-field {
+    width: 100% !important;
+}
+

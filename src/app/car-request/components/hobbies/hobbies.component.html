@@ -1,40 +1,5 @@
-<!-- <ng-container [formGroup]="parentForm">
-    <ng-container [formArrayName]="childFromName">
-        <ng-container *ngFor="let hobbyForm of hobbies.controls; let i = index">
-            <ng-container [formGroupName]="i">
-                <div class="hobby-item" >
-                    <mat-form-field>
-                        <mat-label> hobby </mat-label>
-                        <input 
-                        matInput
-                        [id]="i.toString()" 
-                        [type]="'text'" 
-                        [formControlName]="'hobby'"
-                        [placeholder]="'enter hobby'"
-                        autocomplete="on"
-                        [errorStateMatcher]="matcher"
-                        >
-                        <mat-error> hobby is required </mat-error>
-                         
-                      </mat-form-field>
-                      <span class="icons-container">
-                        <ng-container *ngIf="hobbies.length > 1">
-                            <button type="button" mat-icon-button (click)="removeHobby(i)">
-                                <mat-icon color="warn">delete</mat-icon>
-                            </button>
-                          </ng-container>
-                          <button type="button" mat-icon-button (click)="addHobby(i)">
-                            <mat-icon color="primary">add</mat-icon>
-                        </button>
-                      </span>
-                </div>
-            </ng-container>
-            
-        </ng-container>
-    </ng-container>
-</ng-container> -->
 <ng-container [formGroup]="parentForm">
-    <mat-form-field class="example-form-field">
+    <mat-form-field>
         <mat-label>Video keywords</mat-label>
         <mat-chip-grid #chipGrid aria-label="Enter keywords" [formControlName]="childFromName" >
             <ng-container *ngFor="let hobby of hobbies">

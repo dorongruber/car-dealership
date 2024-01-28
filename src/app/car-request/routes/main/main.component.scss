@@ -1,16 +1,11 @@
 section {
-    height: calc(100vh - 2* var(--mat-toolbar-standard-height));
+    height: 100vh;
     background-color: gray;
     overflow-y: auto;
-    padding-block: 16px;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-@media (max-width: 599px)
-{
-    section {
-        height: calc(100vh - 2* var(--mat-toolbar-mobile-height));
-    }
-    
-}
 

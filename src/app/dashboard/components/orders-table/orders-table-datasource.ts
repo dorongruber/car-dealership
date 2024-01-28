@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, merge, of } from 'rxjs';
-import { MockCarRequestService } from 'src/app/shared/services/mock-car-request.service';
+import { CarRequestService } from 'src/app/shared/services/mock-car-request.service';
 import { CarRequest } from 'src/app/shared/models/car-request';
 
 
@@ -16,7 +16,7 @@ export class OrdersTableDataSource extends DataSource<CarRequest> {
   paginator!: MatPaginator;
   sort!: MatSort;
 
-  constructor(private carRequestService: MockCarRequestService) {
+  constructor(private carRequestService: CarRequestService) {
     super();
   }
 

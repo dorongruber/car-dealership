@@ -28,9 +28,7 @@ export class BarChartComponent implements OnChanges {
   chartData!: BarChartData;
   constructor() {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log("changes ==> ", changes);
-    
+  ngOnChanges(changes: SimpleChanges): void {    
       this.barChartData = {
         labels: this.chartData.labels,
         datasets: this.chartData.datasets.map(dataset => ({data: dataset.data, label: dataset.label}))

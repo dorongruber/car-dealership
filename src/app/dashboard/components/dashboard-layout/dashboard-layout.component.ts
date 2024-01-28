@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { map } from 'rxjs/operators';
-import { BarChartData, DynamicBarChartData } from '../../models/bar-chart-data';
+import { map, tap } from 'rxjs/operators';
+import { DynamicBarChartData } from '../../models/bar-chart-data';
 import { PopulateChartService } from '../../services/populate-chart.service';
+import { CarRequestService } from 'src/app/shared/services/mock-car-request.service';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -11,13 +12,14 @@ import { PopulateChartService } from '../../services/populate-chart.service';
 })
 export class DashboardLayoutComponent {
   private breakpointObserver = inject(BreakpointObserver);
-  response: BarChartData = {
-    labels: [],
-    datasets: []
-  };
+
   barCharts: DynamicBarChartData[] = [];
-  constructor(private populateChartService: PopulateChartService) {
-    this.barCharts = this.populateChartService.getPopulatedCharts();
+  constructor(private populateChartService: PopulateChartService, private carRequestService: CarRequestService) {
+    this.carRequestService.carRequests.pipe(tap(res => {
+      this.barCharts = this.populateChartService.getPopulatedCharts();
+    }
+      )).subscribe()
+    
   }
 
   /** Based on the screen size, switch from standard to one column per row */

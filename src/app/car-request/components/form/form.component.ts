@@ -15,7 +15,7 @@ import {
   hobbyMinLength } from '../../consts/fields-restraints';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
-import { MockCarRequestService } from 'src/app/shared/services/mock-car-request.service';
+import { CarRequestService } from 'src/app/shared/services/mock-car-request.service';
 
 
 @Component({
@@ -31,7 +31,7 @@ export class FormComponent {
 
   constructor(private fb: FormBuilder, 
     private dialog: MatDialog,
-    private carRequestService: MockCarRequestService) {
+    private carRequestService: CarRequestService) {
     this.form = this.fb.group({
       name: this.fb.control<string>("", [Validators.min(fullNameMinLength), Validators.max(fullNameMaxLength), Validators.required]),
       birthDate: this.fb.control<string>("", [Validators.required]),
@@ -52,19 +52,15 @@ export class FormComponent {
     const dialogRef = this.dialog.open(DialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 
   onSubmit(form: FormGroup) {
-    console.log("form.invalid ==> ", form.value);
     if(form.invalid) {
       form.markAllAsTouched();
       return;
     }
-    this.carRequestService.post(form.value);
-    // console.log("valid form ==> ", form.value);
-    
+    this.carRequestService.post(form.value);    
     this.openDialog();
   }
 }

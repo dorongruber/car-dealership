@@ -14,7 +14,9 @@ export class LocalStorageService {
     }
 
     add(key: string, data: any) {
-        localStorage.setItem(key, data);
+        if(!this.get(key)) {
+            localStorage.setItem(key, data);
+        }
     }
 
     remove(key: string) {

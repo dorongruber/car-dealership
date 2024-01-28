@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { MockCarRequestService } from "src/app/shared/services/mock-car-request.service";
+import { CarRequestService } from "src/app/shared/services/mock-car-request.service";
 import { BarChartComponent } from "../components/bar-chart/bar-chart.component";
 import { DynamicBarChartData } from "../models/bar-chart-data";
 import { CustomComponentRef } from "src/app/shared/models/custom-component-ref";
@@ -7,7 +7,7 @@ import { CustomComponentRef } from "src/app/shared/models/custom-component-ref";
 @Injectable()
 export class PopulateChartService {
 
-   constructor(private carRequestService: MockCarRequestService) {}
+   constructor(private carRequestService: CarRequestService) {}
    
    getPopulatedCharts(): DynamicBarChartData[] {
         return [

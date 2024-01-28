@@ -7,7 +7,7 @@
             <div class="container">
                 <app-text-input 
                 [parentForm]="form" 
-                [controlName]="'fullName'"
+                [controlName]="'name'"
                 ></app-text-input>
             
                 <app-datepicker-input 
@@ -53,7 +53,7 @@
                 <app-option-select 
                 [parentForm]="form"
                 [label]="'motor type'"
-                [childFromName]="'motorType'" 
+                [childFromName]="'motor'" 
                 [options]="motors" 
                 [isMultiSelect]="false"
                 ></app-option-select>

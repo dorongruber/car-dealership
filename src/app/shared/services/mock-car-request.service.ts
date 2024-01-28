@@ -33,24 +33,47 @@ const ageGroups: ageGroup[] = [
 @Injectable({
     providedIn: "root",
 })
-export class MockCarRequestService {
+export class CarRequestService {
 
     carRequests: BehaviorSubject<CarRequest[]> = new BehaviorSubject<CarRequest[]>(mockCarRequests);
     
     constructor(private storageService: LocalStorageService,) {}
 
+    initStorage() {
+        this.storageService.add("car-request-repo", JSON.stringify(mockCarRequests));
+    }
+
     post(data: AbstractControl<any, any>) {
         
         const newCarRequest = CarRequest.fromJson(data);
-        this.storageService.add("new-car-request", JSON.stringify(newCarRequest));
+        console.log("post ==> ", newCarRequest instanceof CarRequest);
+        const stringifyRequests = this.storageService.get("car-request-repo")!;
+        
+        const parsedData = JSON.parse(stringifyRequests);
+        parsedData.push(newCarRequest);
+        this.storageService.remove("car-request-repo");
+        this.storageService.add("car-request-repo", JSON.stringify(parsedData));
+        this.carRequests.next(this.carRequests.value.concat(newCarRequest));
+        
     }
 
     get() {
         this.carRequests.next(mockCarRequests);
     }
 
+    getCarRequests(): void {
+        const stringifyRequests = this.storageService.get("car-request-repo");
+        console.log("mockCarRequests ==> ", mockCarRequests[0] instanceof CarRequest);
+        
+        if(stringifyRequests) {
+            const parsedData = JSON.parse(stringifyRequests);
+
+            this.carRequests.next(parsedData.map((request: { [key: string]: any; }) => CarRequest.fromJson(request))) ;
+        }
+    }
+
     getData(startIndex: number, offset: number, sort: MatSort | undefined) {
-        return this.getPagedData(this.getSortedData([...mockCarRequests], sort ), startIndex, offset);
+        return this.getPagedData(this.getSortedData([...this.carRequests.value], sort ), startIndex, offset);
     }
 
     getPopularColorbyAge() {
@@ -167,7 +190,9 @@ export class MockCarRequestService {
     //   };
 
     getCount() {
-        return mockCarRequests.length;
+        console.log("this.carRequests.value.length ==> ", this.carRequests.value.length);
+        
+        return this.carRequests.value.length;
     }
 
     /**

@@ -25,6 +25,7 @@ import { OptionSelectComponent } from './components/option-select/option-select.
 import { ColorpickerInputComponent } from './components/colorpicker-input/colorpicker-input.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { ColorPickerDirective } from './directives/color-picker.directive';
+import { FormControlService } from './services/form-controller.service';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ColorPickerDirective } from './directives/color-picker.directive';
   ],
   providers: [
     NativeDateAdapter,
+    FormControlService,
   ]
 })
 export class CarRequestModule { }

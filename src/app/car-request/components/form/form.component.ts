@@ -16,6 +16,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { CarRequestService } from 'src/app/shared/services/mock-car-request.service';
+import { FormControlService } from '../../services/form-controller.service';
 
 
 @Component({
@@ -28,10 +29,11 @@ export class FormComponent {
   genders = genderOptions;
   motors = motorOptions;
   seats = seatOptions;
-
   constructor(private fb: FormBuilder, 
     private dialog: MatDialog,
-    private carRequestService: CarRequestService) {
+    private carRequestService: CarRequestService,
+    private formControlService: FormControlService
+    ) {
     this.form = this.fb.group({
       name: this.fb.control<string>("", [Validators.min(fullNameMinLength), Validators.max(fullNameMaxLength), Validators.required]),
       birthDate: this.fb.control<string>("", [Validators.required]),
@@ -46,6 +48,9 @@ export class FormComponent {
       seats: this.fb.control<number>(this.seats[0].value as number, [Validators.required]),
       motor: this.fb.control<string>(this.motors[0].value as string, [Validators.required])
     });
+
+    console.log("this form ==> ", this.form);
+    
   }
 
   openDialog() {

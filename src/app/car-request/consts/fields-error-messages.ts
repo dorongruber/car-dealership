@@ -25,8 +25,8 @@ const seatsRequiredError= "select number of seats";
 const requiredError: string = "is required";
 
 const requiredErrorType: string = "required";
-const minErrorType: string = "required";
-const maxErrorType: string = "required";
+const minErrorType: string = "min";
+const maxErrorType: string = "max";
 
 export const fullNameErrors: Map<string, string> = new Map<string, string>([
     [ requiredErrorType, requiredError],

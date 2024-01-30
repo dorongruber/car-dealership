@@ -1,4 +1,4 @@
-import { ValidatorFn } from "@angular/forms";
+import { ValidationErrors, ValidatorFn } from "@angular/forms";
 
 export class CustomValidators {
   private _validatorFns: ValidatorFn[];
@@ -14,12 +14,7 @@ export class CustomValidators {
     return this._validatorFns;
   }
 
-  addValidator(errorType: string, errMsg: string) {
-    if(!this.validatorDic[errorType])
-      this.validatorDic[errorType] = errMsg;
-  }
-
-  getErrorMsg(type: string) {
+  getErrorMsg(type: string) {    
     return this.validatorDic[type];
   }
 }

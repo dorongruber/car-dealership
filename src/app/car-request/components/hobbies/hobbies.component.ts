@@ -1,8 +1,9 @@
 import { Component, Input, inject } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MyErrorStateMatcher } from '../../consts/fields-error-messages';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
+import { CustomControl } from '../../models/form-field';
+import { hobbiesLength, hobbyLength } from '../../consts/fields-restraints';
 
 
 @Component({
@@ -11,30 +12,12 @@ import {LiveAnnouncer} from '@angular/cdk/a11y';
   styleUrls: ['./hobbies.component.scss'],
 })
 export class HobbiesComponent {
-  @Input() parentForm!: FormGroup;
-  @Input() childFromName!: string;
-  matcher = new MyErrorStateMatcher();
-
+  @Input() control!: CustomControl;
+  @Input() parent!: FormGroup;
+  hobbyMinMax = hobbyLength;
   hobbies: string[] = [];
   constructor(private fb: FormBuilder){}
-
-  // get hobbies() {
-  //   return this.parentForm.controls[this.childFromName] as FormArray;
-  // }
-
-  // getHobby(index: number) {
-  //   return this.hobbies.controls[index] as FormGroup;
-  // }
-
-  // addHobby(index: number) {
-  //   this.hobbies.insert(index +1,this.fb.group({
-  //     hobby: this.fb.control("", [Validators.required, Validators.min(3), Validators.max(20)])
-  //   }));
-  // }
-
-  // removeHobby(index: number) {
-  //   this.hobbies.removeAt(index);
-  // }
+  
   announcer = inject(LiveAnnouncer);
 
   removeKeyword(hobby: string) {
@@ -47,8 +30,19 @@ export class HobbiesComponent {
   }
 
   add(event: MatChipInputEvent): void {
+    
     const value = (event.value || '').trim();
-
+    if(value.length < this.hobbyMinMax.min) {
+      this.control.control.setErrors({"minhobbylength": true});
+      return;
+    }
+    if(value.length > this.hobbyMinMax.max) {
+      this.control.control.setErrors({"maxhobbylength": true});
+      return;
+    }        
+    if(this.hobbies.length > hobbiesLength.max) {
+      return;
+    }
     // Add our keyword
     if (value) {
       this.hobbies.push(value);
@@ -57,5 +51,6 @@ export class HobbiesComponent {
     // Clear the input value
     event.chipInput!.clear();
   }
+  
 }
 

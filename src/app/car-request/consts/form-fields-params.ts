@@ -6,6 +6,7 @@ export const NameParams = {
     "placeholder": "enter full name",
     "type": "text",
     "value": "",
+    "hint": "1-3 words, 3-8 letters each."
 }
 
 export const BirthDateParams = {
@@ -22,6 +23,7 @@ export const GenderParams = {
     "placeholder": "select gender",
     "type": "text",
     "value": genderOptions[0].value,
+    "options": genderOptions
 }
 
 export const AddressParams = {
@@ -30,6 +32,7 @@ export const AddressParams = {
     "placeholder": "enter address",
     "type": "text",
     "value": "",
+    "hint": "1-5 digits, 1-3 words, 4-10 letters."
 }
 
 export const CityParams = {
@@ -38,6 +41,7 @@ export const CityParams = {
     "placeholder": "enter city",
     "type": "text",
     "value": "",
+    "hint": "1-2 words, 5-10 letters each."
 }
 
 export const ContryParams = {
@@ -70,6 +74,7 @@ export const SeatsParams = {
     "placeholder": "select quantity of seats",
     "type": "number",
     "value": seatOptions[0].value,
+    "options": seatOptions
 }
 
 export const MotorParams = {
@@ -78,4 +83,5 @@ export const MotorParams = {
     "placeholder": "select motor",
     "type": "text",
     "value": motorOptions[0].value,
+    "options": motorOptions
 }

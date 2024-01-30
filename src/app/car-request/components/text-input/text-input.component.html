@@ -1,17 +1,20 @@
-<ng-container [formGroup]="parentForm">
+<ng-container [formGroup]="parent">
   <mat-form-field>
-    <mat-label>{{ label }}</mat-label>
+    <mat-label>{{ control.data.label }}</mat-label>
     <input 
     matInput
-    [id]="controlName" 
-    [type]="inputType" 
-    [formControlName]="controlName"
-    [placeholder]="placeholder"
+    [id]="control.data.key!" 
+    type="text" 
+    [formControlName]="control.data.key!"
+    [placeholder]="control.data.placeholder!"
     autocomplete="on"
     [errorStateMatcher]="matcher"
     >
-    <mat-error>{{ label }} is required </mat-error>
-     
+    <mat-hint *ngIf="control.data.hint"> {{ control.data.hint }} </mat-hint>
+    <mat-error *ngIf="control.control.hasError('required')">{{ control.validators?.getErrorMsg("required") }} </mat-error>
+    <mat-error *ngIf="control.control.hasError('minlength')">{{ control.validators?.getErrorMsg("minlength") }} </mat-error>
+    <mat-error *ngIf="control.control.hasError('maxlength')">{{ control.validators?.getErrorMsg("maxlength") }} </mat-error>
+
   </mat-form-field>
   
 </ng-container>

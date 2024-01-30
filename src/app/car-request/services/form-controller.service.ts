@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-//import { FormField } from "../models/form-field";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { CustomBasicControl } from "../models/form-field";
+import { carRequestGroup } from "../consts/car-request-form";
 
 @Injectable()
 export class FormControlService {
@@ -11,10 +11,11 @@ export class FormControlService {
   }
 
   InstantiateForm(formFieldsTree: CustomBasicControl) {
-    const structuredFrom = formFieldsTree.ToRelatedFormFormat(this.fb) as FormGroup;
-    console.log("structuredFrom ==> ", structuredFrom);
-    
-    return structuredFrom;
+    return formFieldsTree.ToRelatedFormFormat(this.fb) as FormGroup;
+  }
+
+  GetMainFormStructure() {
+    return carRequestGroup;
   }
 
   GetFlattedList(formFieldsTree: CustomBasicControl) {

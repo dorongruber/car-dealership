@@ -1,16 +1,29 @@
 import { AbstractControl, FormBuilder, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { CustomValidators } from "./custom-validator";
+import { CustomComponentRef } from "src/app/shared/models/custom-component-ref";
+import { SelectOption } from "../consts/form-options";
+
+export interface ControlBasicData {
+    key: string;
+    value?: string | string[] | number;
+    options?: SelectOption[];
+    label?: string;
+    placeholder?: string;
+    position: number;
+    hint?: string;
+    componentRef?: CustomComponentRef;
+}
+
+
 export abstract class CustomBasicControl {
   control!: AbstractControl<any,any>;
   validators: CustomValidators | undefined;
-  properties: {[key: string]: string | undefined};
+  data: ControlBasicData;
   parent?: CustomBasicControl | undefined;
-  constructor(label: string, validators?: CustomValidators)
+  constructor(data: ControlBasicData, validators?: CustomValidators)
     {
-      this.properties = {};
+      this.data = data;
       this.validators = validators;
-      this.properties["label"] = label;
-      this.properties["name"] = label.toLocaleLowerCase();
     }
 
   abstract ToRelatedFormFormat(fb: FormBuilder): AbstractControl<any,any>;
@@ -25,26 +38,17 @@ export abstract class CustomBasicControl {
 
 }
 
-const ContrllerMostHaveValidator: ValidatorFn = (control:
-  AbstractControl): ValidationErrors | null =>  {
-    return {NoValidatorsDefined: true};
-  };
-
 export class CustomControl extends CustomBasicControl {
 
-  constructor(label: string, type:string
-    , validators?: CustomValidators,
-    { value = "", toolTip = undefined} :
-    { value?: string, toolTip?: string} = {},
+  constructor(
+    data: ControlBasicData, 
+    validators?: CustomValidators,
      ) {
-      super(label , validators);
-    this.properties["value"] = value;
-    this.properties["type"] = type;
-    this.properties["toolTip"] = toolTip;
+      super(data , validators);
   }
 
   ToRelatedFormFormat(fb: FormBuilder): AbstractControl<any, any> {
-    this.control = fb.control(this.properties["value"], this.validators?.validatorFn);
+    this.control = fb.control(this.data["value"], this.validators?.validatorFn);
     return this.control;
   }
 
@@ -59,16 +63,16 @@ export class CustomControl extends CustomBasicControl {
 
 export class CustomGroup extends CustomBasicControl {
   childrens: CustomBasicControl[];
-  constructor(label: string, {validators = undefined, childrens = []} :
+  constructor(data: ControlBasicData, {validators = undefined, childrens = []} :
     {validators?: CustomValidators, childrens?: CustomBasicControl[]}
     = {}) {
-      super(label, validators);
+      super(data, validators);
     this.childrens = childrens;
   }
   ToRelatedFormFormat(fb: FormBuilder): AbstractControl<any, any> {
     const formControls: {[key: string]: AbstractControl} = {};
     this.childrens.forEach(child => {
-        formControls[child.properties["name"]!] = child.ToRelatedFormFormat(fb);
+        formControls[child.data["key"]!] = child.ToRelatedFormFormat(fb);
 
     });
     this.control = fb.group(formControls, {validators: this.validators?.validatorFn},);
@@ -88,8 +92,7 @@ export class CustomGroup extends CustomBasicControl {
   }
 
   override Add(control: CustomBasicControl): void {
-    if(!this.properties["label"]!.includes("main"))
-      control.parent = this;
+    control.parent = this;
     this.childrens.push(control);
   }
 
@@ -102,10 +105,10 @@ export class CustomGroup extends CustomBasicControl {
 
 
 export class CustomArray extends  CustomGroup {
-  constructor(label: string, {validators = undefined, childrens = []} :
+  constructor(data: ControlBasicData, {validators = undefined, childrens = []} :
     {validators?: CustomValidators, childrens?: CustomBasicControl[]}
     = {}) {
-      super(label, {validators: validators, childrens: childrens});
+      super(data, {validators: validators, childrens: childrens});
   }
 
   override ToRelatedFormFormat(fb: FormBuilder): AbstractControl<any, any> {

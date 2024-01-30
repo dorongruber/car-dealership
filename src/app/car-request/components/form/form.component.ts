@@ -1,22 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { genderOptions, motorOptions, seatOptions } from '../../consts/form-options';
-import { 
-  addressMaxLength, 
-  addressMinLength, 
-  cityMaxLength, 
-  cityMinLength, 
-  contryMaxLength, 
-  contryMinLength, 
-  fullNameMaxLength, 
-  fullNameMinLength, 
-  hobbiesMinLength, 
-  hobbyMaxLength, 
-  hobbyMinLength } from '../../consts/fields-restraints';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { CarRequestService } from 'src/app/shared/services/mock-car-request.service';
 import { FormControlService } from '../../services/form-controller.service';
+import { carRequestGroup } from '../../consts/car-request-form';
+import { CustomGroup } from '../../models/form-field';
 
 
 @Component({
@@ -29,28 +19,14 @@ export class FormComponent {
   genders = genderOptions;
   motors = motorOptions;
   seats = seatOptions;
-  constructor(private fb: FormBuilder, 
+  formStructure: CustomGroup;
+  constructor( 
     private dialog: MatDialog,
     private carRequestService: CarRequestService,
     private formControlService: FormControlService
     ) {
-    this.form = this.fb.group({
-      name: this.fb.control<string>("", [Validators.min(fullNameMinLength), Validators.max(fullNameMaxLength), Validators.required]),
-      birthDate: this.fb.control<string>("", [Validators.required]),
-      gender: this.fb.control<string>(this.genders[0].value as string, [Validators.required]),
-      location: this.fb.group({
-        address: this.fb.control<string>("", [Validators.required, Validators.min(addressMinLength), Validators.max(addressMaxLength)]),
-        city: this.fb.control<string>("", [Validators.required, Validators.min(cityMinLength), Validators.max(cityMaxLength)]),
-        contry: this.fb.control<string>("", [Validators.required, Validators.min(contryMinLength), Validators.max(contryMaxLength)]),
-      }),
-      hobbies: this.fb.control<string[]>([], [Validators.required]),
-      favoriteColor: this.fb.control<string>("", [Validators.required]),
-      seats: this.fb.control<number>(this.seats[0].value as number, [Validators.required]),
-      motor: this.fb.control<string>(this.motors[0].value as string, [Validators.required])
-    });
-
-    console.log("this form ==> ", this.form);
-    
+      this.form = this.formControlService.InstantiateForm(carRequestGroup);
+      this.formStructure = this.formControlService.GetMainFormStructure();  
   }
 
   openDialog() {
@@ -61,6 +37,7 @@ export class FormComponent {
   }
 
   onSubmit(form: FormGroup) {
+    
     if(form.invalid) {
       form.markAllAsTouched();
       return;

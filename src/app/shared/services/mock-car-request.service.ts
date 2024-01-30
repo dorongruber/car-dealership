@@ -45,8 +45,7 @@ export class CarRequestService {
 
     post(data: AbstractControl<any, any>) {
         
-        const newCarRequest = CarRequest.fromJson(data);
-        console.log("post ==> ", newCarRequest instanceof CarRequest);
+        const newCarRequest = CarRequest.fromFormJson(data);
         const stringifyRequests = this.storageService.get("car-request-repo")!;
         
         const parsedData = JSON.parse(stringifyRequests);
@@ -62,9 +61,7 @@ export class CarRequestService {
     }
 
     getCarRequests(): void {
-        const stringifyRequests = this.storageService.get("car-request-repo");
-        console.log("mockCarRequests ==> ", mockCarRequests[0] instanceof CarRequest);
-        
+        const stringifyRequests = this.storageService.get("car-request-repo");        
         if(stringifyRequests) {
             const parsedData = JSON.parse(stringifyRequests);
 

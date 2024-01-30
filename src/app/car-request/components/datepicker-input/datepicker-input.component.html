@@ -1,12 +1,13 @@
-<ng-container [formGroup]="parentForm">
+<ng-container [formGroup]="parent">
   <mat-form-field>
     <mat-label>Choose a date</mat-label>
     <input matInput 
-    [formControlName]="childFromName"
+    [formControlName]="control.data.key!"
     readonly="true"
     [matDatepicker]="picker">
-    <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
+    
+    <mat-error *ngIf="control.control.hasError('required')">{{ control.validators?.getErrorMsg("required") }} </mat-error>
   </mat-form-field>
 </ng-container>

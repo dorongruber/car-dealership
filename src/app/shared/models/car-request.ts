@@ -28,6 +28,18 @@ export class CarRequest {
             this.motor = motor;
         }
     
+    public static fromFormJson(json: {[key: string]: any}) {
+        return new CarRequest(
+            json["user"]["name"],
+            json["user"]["gender"],
+            json["user"]["birthDate"],
+            json["user"]["hobbies"],
+            Location.fromJson(json["location"]),
+            json["car"]["favoriteColor"],
+            json["car"]["seats"],
+            json["car"]["motor"],
+        );
+    }
 
     public static fromJson(json: {[key: string]: any}) {
         return new CarRequest(

@@ -1,18 +1,16 @@
-<ng-container [formGroup]="parentForm">
+<ng-container [formGroup]="parent">
     <mat-form-field>
 
-        <mat-label>{{ label }}</mat-label>
+        <mat-label>{{ control.data.label }}</mat-label>
         
         <mat-select 
-        [id]="childFromName"
-        [formControlName]="childFromName" 
-        [multiple]="isMultiSelect">
-            <ng-container *ngFor="let option of options">
+        [id]="control.data.key!"
+        [formControlName]="control.data.key!" 
+        [multiple]="false">
+            <ng-container *ngFor="let option of control.data.options">
                 <mat-option [value]="option.value">{{option.value}}</mat-option>
             </ng-container>
         </mat-select>
-
-        <mat-error>{{ label }} is required </mat-error>
 
       </mat-form-field>
 </ng-container>

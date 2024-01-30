@@ -2,69 +2,24 @@
     <app-header [title]="'New Car Requst'"></app-header>
     <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
         
-        <div>
-            <h2>personal information</h2>
-            <div class="container">
-                <app-text-input 
-                [parentForm]="form" 
-                [controlName]="'name'"
-                ></app-text-input>
-            
-                <app-datepicker-input 
-                [parentForm]="form" 
-                [childFromName]="'birthDate'"
-                ></app-datepicker-input>
-                
-                <app-option-select 
-                [parentForm]="form"
-                [label]="'gender'"
-                [childFromName]="'gender'" 
-                [options]="genders" 
-                [isMultiSelect]="false"
-                ></app-option-select>
-
-                <app-hobbies 
-                [parentForm]="form"
-                [childFromName]="'hobbies'"
-                ></app-hobbies>
-            </div>
-        </div>
-
-        <mat-divider></mat-divider>
-    
-        <app-location-form 
-        [parentForm]="form"
-        [childFromName]="'location'"
-        ></app-location-form>
-
-        <mat-divider></mat-divider>
-        
-        <div>
-            <h2>preferences</h2>
-            <div class="container">
-                <app-option-select 
-                [parentForm]="form"
-                [label]="'number of seats'"
-                [childFromName]="'seats'" 
-                [options]="seats" 
-                [isMultiSelect]="false"
-                ></app-option-select>
-            
-                <app-option-select 
-                [parentForm]="form"
-                [label]="'motor type'"
-                [childFromName]="'motor'" 
-                [options]="motors" 
-                [isMultiSelect]="false"
-                ></app-option-select>
-            
-                <app-colorpicker-input 
-                [parentForm]="form"
-                [label]="'favorite Color'"
-                [childFromName]="'favoriteColor'"
-                ></app-colorpicker-input>
-            </div>
-        </div>
+        <ng-container *ngFor="let control of formStructure.childrens; let i = index">
+            <ng-container *ngIf="control.AsChildrens() else isControl">
+                <ng-container [formGroupName]="control.data.key!">
+                    <div>
+                        <h2>{{ control.data.label | titlecase}}</h2>
+                        <div class="container">
+                            <ng-container *ngFor="let control of control.GetChildrens()">
+                                <app-dynamic-input-loader [control]="control"></app-dynamic-input-loader>
+                            </ng-container>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+            <ng-template #isControl>
+                <app-dynamic-input-loader [control]="control"></app-dynamic-input-loader>
+            </ng-template>
+            <mat-divider *ngIf="i < formStructure.childrens.length - 1"></mat-divider>
+        </ng-container>
     
         <button 
         [disabled]="form.invalid"

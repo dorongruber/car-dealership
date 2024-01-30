@@ -1,26 +1,68 @@
-import { FormArray, FormControl, FormGroup, ValidatorFn, Validators } from "@angular/forms";
+import { Validators } from "@angular/forms";
 
-import { AddressParams, BirthDateParams, CityParams, ColorParams, ContryParams, GenderParams, HobbiesParams, MotorParams, NameParams, SeatsParams } from "./form-fields-params";
-import { fullNameMaxLength, fullNameMinLength } from "./fields-restraints";
-import { addressErrors, birthDateErrors, cityErrors, colorErrors, contryErrors, fullNameErrors, genderDateErrors, hobbyErrors, motorTypeErrors, seatsErrors } from "./fields-error-messages";
+import { 
+    AddressParams, 
+    BirthDateParams, 
+    CityParams, 
+    ColorParams, 
+    ContryParams, 
+    GenderParams, 
+    HobbiesParams, 
+    MotorParams, 
+    NameParams, 
+    SeatsParams } from "./form-fields-params";
+import { 
+    addressLength, 
+    cityLength, 
+    contryLength, 
+    fullNameLength, 
+    hobbiesLength} from "./fields-restraints";
+import { 
+    addressErrors, 
+    birthDateErrors, 
+    cityErrors, 
+    colorErrors, 
+    contryErrors, 
+    fullNameErrors, 
+    genderDateErrors, 
+    hobbyErrors, 
+    motorTypeErrors, 
+    seatsErrors } from "./fields-error-messages";
 import { CustomComponentRef } from "src/app/shared/models/custom-component-ref";
 import { TextInputComponent } from "../components/text-input/text-input.component";
 import { DatepickerInputComponent } from "../components/datepicker-input/datepicker-input.component";
 import { OptionSelectComponent } from "../components/option-select/option-select.component";
 import { HobbiesComponent } from "../components/hobbies/hobbies.component";
-import { LocationFormComponent } from "../components/location-form/location-form.component";
 import { ColorpickerInputComponent } from "../components/colorpicker-input/colorpicker-input.component";
 import { CustomControl, CustomGroup } from "../models/form-field";
 import { CustomValidators } from "../models/custom-validator";
 
-const nameControl = new CustomControl(NameParams["label"], NameParams["type"],
+const nameControl = new CustomControl(
+    {
+        key: NameParams.key, 
+        value: NameParams.value,
+        label: NameParams.label, 
+        placeholder: NameParams.placeholder, 
+        position: 0, 
+        hint: NameParams.hint,
+        componentRef: new CustomComponentRef(TextInputComponent)
+    },
     new CustomValidators([...fullNameErrors.keys()], 
-    [Validators.min(fullNameMinLength), Validators.max(fullNameMaxLength), Validators.required],
+    [Validators.minLength(fullNameLength.min), Validators.maxLength(fullNameLength.max), Validators.required],
      [...fullNameErrors.values()]
      )
 );
 
-const birthDateControl = new CustomControl(BirthDateParams["label"], BirthDateParams["type"],
+const birthDateControl = new CustomControl(
+    {
+        key: BirthDateParams.key, 
+        value: BirthDateParams.value,
+        label: BirthDateParams.label, 
+        placeholder: BirthDateParams.placeholder, 
+        position: 1, 
+        hint: undefined,
+        componentRef: new CustomComponentRef(DatepickerInputComponent)
+    },
     new CustomValidators(
         [...birthDateErrors.keys()], 
         [ Validators.required],
@@ -28,7 +70,17 @@ const birthDateControl = new CustomControl(BirthDateParams["label"], BirthDatePa
      )
 );
 
-const genderControl = new CustomControl(GenderParams["label"], GenderParams["type"],
+const genderControl = new CustomControl(
+    {
+        key: GenderParams.key, 
+        value: GenderParams.value,
+        options: GenderParams.options,
+        label: GenderParams.label, 
+        placeholder: GenderParams.placeholder, 
+        position: 1, 
+        hint: undefined,
+        componentRef: new CustomComponentRef(OptionSelectComponent)
+    },
     new CustomValidators(
         [...genderDateErrors.keys()], 
         [ Validators.required],
@@ -36,50 +88,107 @@ const genderControl = new CustomControl(GenderParams["label"], GenderParams["typ
      )
 );
 
-const hobbiesControl = new CustomControl(HobbiesParams["label"], HobbiesParams["type"],
+const hobbiesControl = new CustomControl(
+    {
+        key: HobbiesParams.key, 
+        value: HobbiesParams.value,
+        label: HobbiesParams.label, 
+        placeholder: HobbiesParams.placeholder, 
+        position: 1, 
+        componentRef: new CustomComponentRef(HobbiesComponent)
+    },
     new CustomValidators(
         [...hobbyErrors.keys()], 
-        [ Validators.required],
+        [ Validators.required, Validators.maxLength(hobbiesLength.max)],
         [...hobbyErrors.values()]
      )
 );
 
-const generalInfoGroup = new CustomGroup("general info form");
+const generalInfoGroup = new CustomGroup(
+    {
+        key: "user", 
+        label: "user information", 
+        position: 0, 
+    },
+);
 generalInfoGroup.Add(nameControl);
 generalInfoGroup.Add(birthDateControl);
 generalInfoGroup.Add(genderControl);
 generalInfoGroup.Add(hobbiesControl);
 
-const addressControl = new CustomControl(AddressParams["label"], AddressParams["type"],
+const addressControl = new CustomControl(
+    {
+        key: AddressParams.key, 
+        value: AddressParams.value,
+        options: undefined,
+        label: AddressParams.label, 
+        placeholder: AddressParams.placeholder, 
+        position: 0, 
+        hint: AddressParams.hint,
+        componentRef: new CustomComponentRef(TextInputComponent)
+    },
     new CustomValidators(
         [...addressErrors.keys()], 
-        [ Validators.required],
+        [ Validators.required, Validators.minLength(addressLength.min), Validators.maxLength(addressLength.max)],
         [...addressErrors.values()]
      )
 );
 
-const cityControl = new CustomControl(CityParams["label"], CityParams["type"],
+const cityControl = new CustomControl(
+    {
+        key: CityParams.key, 
+        value: CityParams.value,
+        label: CityParams.label, 
+        placeholder: CityParams.placeholder, 
+        position: 0, 
+        hint: CityParams.hint,
+        componentRef: new CustomComponentRef(TextInputComponent)
+    },
     new CustomValidators(
         [...cityErrors.keys()], 
-        [ Validators.required],
+        [ Validators.required, Validators.minLength(cityLength.min), Validators.maxLength(cityLength.max)],
         [...cityErrors.values()]
      )
 );
 
-const contryControl = new CustomControl(ContryParams["label"], ContryParams["type"],
+const contryControl = new CustomControl(
+    {
+        key: ContryParams.key, 
+        value: ContryParams.value,
+        label: ContryParams.label, 
+        placeholder: ContryParams.placeholder, 
+        position: 0, 
+        hint: undefined,
+        componentRef: new CustomComponentRef(TextInputComponent)
+    },
     new CustomValidators(
         [...contryErrors.keys()], 
-        [ Validators.required],
+        [ Validators.required, Validators.minLength(contryLength.min), Validators.maxLength(contryLength.max)],
         [...contryErrors.values()]
      )
 );
 
-const locationGroup = new CustomGroup("location info form");
+const locationGroup = new CustomGroup(
+    {
+        key: "location", 
+        label: "location", 
+        position: 0, 
+    },
+);
 locationGroup.Add(addressControl);
 locationGroup.Add(cityControl);
 locationGroup.Add(contryControl);
 
-const colorControl = new CustomControl(ColorParams["label"], ColorParams["type"],
+const colorControl = new CustomControl(
+    {
+        key: ColorParams.key, 
+        value: ColorParams.value,
+        label: ColorParams.label, 
+        placeholder: ColorParams.placeholder, 
+        position: 0, 
+        hint: undefined,
+        componentRef: new CustomComponentRef(ColorpickerInputComponent)
+    },
     new CustomValidators(
         [...colorErrors.keys()], 
         [ Validators.required],
@@ -87,7 +196,17 @@ const colorControl = new CustomControl(ColorParams["label"], ColorParams["type"]
      )
 );
 
-const seatsControl = new CustomControl(SeatsParams["label"], SeatsParams["type"],
+const seatsControl = new CustomControl(
+    {
+        key: SeatsParams.key, 
+        value: SeatsParams.value,
+        options: SeatsParams.options,
+        label: SeatsParams.label, 
+        placeholder: SeatsParams.placeholder, 
+        position: 0, 
+        hint: undefined,
+        componentRef: new CustomComponentRef(OptionSelectComponent)
+    },
     new CustomValidators(
         [...seatsErrors.keys()], 
         [ Validators.required],
@@ -95,7 +214,17 @@ const seatsControl = new CustomControl(SeatsParams["label"], SeatsParams["type"]
      )
 );
 
-const motorControl = new CustomControl(MotorParams["label"], MotorParams["type"],
+const motorControl = new CustomControl(
+    {
+        key: MotorParams.key, 
+        value: MotorParams.value,
+        options: MotorParams.options,
+        label: MotorParams.label, 
+        placeholder: MotorParams.placeholder, 
+        position: 0, 
+        hint: undefined,
+        componentRef: new CustomComponentRef(OptionSelectComponent)
+    },
     new CustomValidators(
         [...motorTypeErrors.keys()], 
         [ Validators.required],
@@ -103,12 +232,24 @@ const motorControl = new CustomControl(MotorParams["label"], MotorParams["type"]
      )
 );
 
-const carGroup = new CustomGroup("car info form");
+const carGroup = new CustomGroup(
+    {
+        key: "car", 
+        label: "car preferences", 
+        position: 0, 
+    },
+    
+);
 carGroup.Add(colorControl);
 carGroup.Add(seatsControl);
 carGroup.Add(motorControl);
 
-const carRequestGroup = new CustomGroup("main group");
+const carRequestGroup = new CustomGroup(
+    {
+        key: "main group", 
+        position: 0, 
+    },
+);
 carRequestGroup.Add(generalInfoGroup);
 carRequestGroup.Add(locationGroup);
 carRequestGroup.Add(carGroup);

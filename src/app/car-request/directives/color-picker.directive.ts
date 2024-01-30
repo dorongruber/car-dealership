@@ -1,12 +1,12 @@
 import { Directive, ElementRef, HostListener, Input, OnChanges, SimpleChanges } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { AbstractControl, FormControl } from "@angular/forms";
 
 @Directive({
     standalone: true,
     selector: '[appColorPicker]',
 })
 export class ColorPickerDirective implements OnChanges {
-    @Input() appColorPicker!: FormControl;
+    @Input() appColorPicker!: AbstractControl<any, any>;
     constructor(private el: ElementRef) {}
 
     ngOnChanges(changes: SimpleChanges): void {

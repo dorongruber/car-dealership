@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { CustomControl } from '../../models/form-field';
 
 @Component({
   selector: 'app-datepicker-input',
@@ -7,6 +8,6 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./datepicker-input.component.scss']
 })
 export class DatepickerInputComponent {
-  @Input() parentForm!: FormGroup;
-  @Input() childFromName!: string;
+  @Input() control!: CustomControl;
+  @Input() parent!: FormGroup;
 }

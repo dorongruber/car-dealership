@@ -1,19 +1,23 @@
-<ng-container [formGroup]="parentForm">
+<ng-container [formGroup]="parent">
     <mat-form-field>
-        <mat-label>Video keywords</mat-label>
-        <mat-chip-grid #chipGrid aria-label="Enter keywords" [formControlName]="childFromName" >
+        <mat-label>{{ control.data.label }}</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Enter Hobby" [formControlName]="control.data.key!" >
             <ng-container *ngFor="let hobby of hobbies">
                 <mat-chip-row (removed)="removeKeyword(hobby)">
                     {{hobby}}
-                    <button matChipRemove aria-label="'remove ' + keyword">
+                    <button matChipRemove aria-label="'remove ' + Hobby">
                       <mat-icon>cancel</mat-icon>
                     </button>
                   </mat-chip-row></ng-container>
         </mat-chip-grid>
-        <input placeholder="New keyword..."
+        <input [placeholder]="control.data.placeholder!"
                 [matChipInputFor]="chipGrid"
                 (matChipInputTokenEnd)="add($event)"/>
 
-        <mat-error> hobby is required </mat-error>
+              <mat-error *ngIf="control.control.hasError('required')">{{ control.validators?.getErrorMsg("required") }} </mat-error>
+              <mat-error *ngIf="control.control.hasError('minlength')">{{ control.validators?.getErrorMsg("minlength") }} </mat-error>
+              <mat-error *ngIf="control.control.hasError('maxlength')">{{ control.validators?.getErrorMsg("maxlength") }} </mat-error>
+              <mat-error *ngIf="control.control.hasError('minhobbylength')"> min hobby length {{ hobbyMinMax.min }} </mat-error>
+              <mat-error *ngIf="control.control.hasError('maxhobbylength')"> max hobby length {{ hobbyMinMax.max }} </mat-error>
       </mat-form-field>
 </ng-container>

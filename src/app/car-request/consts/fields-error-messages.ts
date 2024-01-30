@@ -25,7 +25,7 @@ const requiredError: string = "field is required";
 const requiredErrorType: string = "required";
 const minErrorType: string = "minlength";
 const maxErrorType: string = "maxlength";
-const patternErrorType: string = "requiredPattern";
+const patternErrorType: string = "pattern";
 
 export const fullNameErrors: Map<string, string> = new Map<string, string>([
     [ requiredErrorType, requiredError],

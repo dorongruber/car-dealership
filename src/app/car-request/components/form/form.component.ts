@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, HostListener, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { genderOptions, motorOptions, seatOptions } from '../../consts/form-options';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { CarRequestService } from 'src/app/shared/services/mock-car-request.service';
 import { FormControlService } from '../../services/form-controller.service';
 import { carRequestGroup } from '../../consts/car-request-form';
 import { CustomGroup } from '../../models/form-field';
+import { MatStepper } from '@angular/material/stepper';
 
 
 @Component({
@@ -14,19 +14,54 @@ import { CustomGroup } from '../../models/form-field';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent {
+export class FormComponent implements AfterViewInit {
   form!: FormGroup;
-  genders = genderOptions;
-  motors = motorOptions;
-  seats = seatOptions;
   formStructure: CustomGroup;
+  @ViewChild(MatStepper, { static: true}) stepper!:MatStepper;
+  
+  stepFromGroup: CustomGroup;
+  currentIndex: number = 0;
+  setpperOrientation!: "vertical" | "horizontal";
+  labelPosition!: 'bottom' | 'end'
+  isMobile: boolean;
   constructor( 
     private dialog: MatDialog,
     private carRequestService: CarRequestService,
     private formControlService: FormControlService
     ) {
       this.form = this.formControlService.InstantiateForm(carRequestGroup);
-      this.formStructure = this.formControlService.GetMainFormStructure();  
+      this.formStructure = this.formControlService.GetMainFormStructure(); 
+      this.stepFromGroup = this.formStructure.childrens[this.currentIndex] as CustomGroup; 
+      this.isMobile = window.innerWidth > 640 ? false : true;      
+      this.setStepperOrientation();
+      
+  }
+
+  ngAfterViewInit(): void {      
+      this.stepper.selectedIndexChange.subscribe(stepIndex => {
+        this.stepFromGroup = this.formStructure.childrens[stepIndex] as CustomGroup;
+        this.currentIndex = stepIndex;
+      })
+      
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.isMobile = window.innerWidth > 640 ? false : true;
+    this.setStepperOrientation();
+  }
+
+  setStepperOrientation() {
+    this.setpperOrientation = this.isMobile ? "horizontal" : "vertical";
+    this.labelPosition = this.isMobile ? "bottom" : "end";
+  }
+
+  nextStep() {
+    this.stepper.next();
+  }
+
+  prevStep() {
+    this.stepper.previous();
   }
 
   openDialog() {

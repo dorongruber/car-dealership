@@ -6,7 +6,7 @@ export const NameParams = {
     "placeholder": "enter full name",
     "type": "text",
     "value": "",
-    "hint": "1-3 words, 3-8 letters each."
+    "hint": "2-3 words, 3-8 letters each."
 }
 
 export const BirthDateParams = {

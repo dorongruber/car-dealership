@@ -14,7 +14,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { CardComponent } from './components/card/card.component';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 import { OrdersTableComponent } from './components/orders-table/orders-table.component';
@@ -48,7 +47,6 @@ import { PopulateChartService } from './services/populate-chart.service';
     MatCardModule,
     MatMenuModule,
     MatIconModule,
-    MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule

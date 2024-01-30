@@ -28,8 +28,8 @@ export const hobbyLength = {
     max: 23,
 }
 
-export const nameRegex = RegExp('\b[a-zA-Z]{3,8}(?:\s+[a-zA-Z]{3,8}){1,2}\b');
-export const cityRegex = RegExp('/\b(?:[a-zA-Z]{5,10}(?:\s+[a-zA-Z]{5,10})?)\b/');
-export const onWordRegex = RegExp('\b[a-zA-Z]{3,25}\b');
-export const addressRegex = RegExp('\b[\d]{1,5}(?:\s+[a-zA-Z]{4,10}){1,3}\b');
+export const nameRegex = RegExp(/\b[a-zA-Z]{3,8}(?:\s+[a-zA-Z]{3,8}){1,2}\b/);
+export const cityRegex = RegExp(/\b(?:[a-zA-Z]{5,10}(?:\s+[a-zA-Z]{5,10})?)\b/);
+export const onWordRegex = RegExp(/\b[a-zA-Z]{3,25}\b/);
+export const addressRegex = RegExp(/\b[\d]{1,5}(?:\s+[a-zA-Z]{4,10}){1,3}\b/);
 

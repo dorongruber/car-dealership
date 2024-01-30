@@ -1,46 +1,111 @@
 section {
-    
-    min-width: 300px;
-    max-width: 720px;
-    border: 1px solid rgb(165, 106, 29);
+    display: flex;
     border-radius: 16px;
     background-color: white;
     margin: auto;
+    height: 600px;
+    max-width: 900px;
+
+    @media (max-width: 640px) {
+        flex-direction: column;
+        min-height: 100%;
+        height: auto;
+        border-radius: unset;
+    }
 }
 
 form {
     display: flex;
-    flex-direction: column;
-    padding: 16px 16px;
-    gap: 10px;
-    box-sizing: border-box;
-}
-
-.container {
-    display: flex;
     flex-wrap: wrap;
-    gap: 10px 8px;
+    row-gap: 40px;
+    column-gap: 20px;
 }
 
 button {
     width: 150px;
 }
 
-:host ::ng-deep app-header mat-toolbar{
-    border-top-left-radius: 16px !important;
-    border-top-right-radius: 16px !important;
-}
-
 :host ::ng-deep mat-divider {
     border-top-color: gray;
 }
 
-
+h1 {
+    font-family: Workbench-Regular !important;
+    font-size: xx-large;
+}
 
 ::ng-deep mat-form-field {
     width: 100% !important;
 }
 
 :host ::ng-deep app-dynamic-input-loader {
-    flex: 1 1 auto !important;
+    flex: 1 1 0 !important;
+}
+
+:host ::ng-deep .mat-step-text-label {
+    color: var(--app-primary-lighter);
+}
+
+.stepper-container {
+    background-color: var(--app-accent-500);
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    padding-block: 20px;
+
+    @media (max-width: 640px) {
+        border-top-left-radius: unset;
+        border-bottom-right-radius: 16px;
+        padding-block: 0;
+    }
+}
+
+.form-step-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: calc(100% - 265px);
+    padding: calc((var(--mat-stepper-header-height) - 24px) / 2) 24px;
+    box-sizing: border-box;
+
+    @media (max-width: 640px) {
+        width: auto;
+    }
+}
+.stepper-headers-container {
+    color: var(--app-accent-50);
+    padding: calc((var(--mat-stepper-header-height) - 24px) / 2) 24px;
+    width: 265px;
+
+    @media (max-width: 640px) {
+        padding-block-end: 0;
+        width: auto;
+    }
+}
+
+.form-step-headers-container {
+    color: var(--app-accent-900);
+    padding-block: calc((var(--mat-stepper-header-height) - 24px) / 2);
+
+    @media (max-width: 640px) {
+        padding-block-start: 0;
+    }
+}
+
+.mat-stepper-vertical, .mat-stepper-horizontal {
+    background: transparent;
+}
+
+.mat-step-text-label:focus {
+    color: antiquewhite;
+}
+
+.form-actions-container {
+    display: flex;
+    column-gap: 15px;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+:host ::ng-deep .mat-horizontal-content-container {
+    padding: 0 !important;
 }

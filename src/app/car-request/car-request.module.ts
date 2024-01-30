@@ -16,13 +16,13 @@ import {MatNativeDateModule, NativeDateAdapter} from '@angular/material/core';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatStepperModule} from '@angular/material/stepper';
 
 import { HobbiesComponent } from './components/hobbies/hobbies.component';
 import { InrangeSelectComponent } from './components/inrange-select/inrange-select.component';
 import { OptionSelectComponent } from './components/option-select/option-select.component';
 import { ColorpickerInputComponent } from './components/colorpicker-input/colorpicker-input.component';
 import { DialogComponent } from './components/dialog/dialog.component';
-import { ColorPickerDirective } from './directives/color-picker.directive';
 import { FormControlService } from './services/form-controller.service';
 import { DynamicInputLoaderComponent } from './components/dynamic-input-loader/dynamic-input-loader.component';
 
@@ -43,7 +43,6 @@ import { DynamicInputLoaderComponent } from './components/dynamic-input-loader/d
     CommonModule,
     CarRequesRoutingModule,
     ReactiveFormsModule,
-    SharedModule,
     MatInputModule,
     MatFormFieldModule,
     MatDatepickerModule, 
@@ -51,7 +50,8 @@ import { DynamicInputLoaderComponent } from './components/dynamic-input-loader/d
     MatDividerModule,
     MatSelectModule,
     MatChipsModule,
-    ColorPickerDirective
+    MatStepperModule,
+    SharedModule,
   ],
   providers: [
     NativeDateAdapter,

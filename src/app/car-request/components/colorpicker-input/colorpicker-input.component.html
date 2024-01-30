@@ -1,7 +1,7 @@
 <ng-container [formGroup]="parent">
     <mat-form-field>
         <mat-label> {{ control.data.label}} </mat-label>
-        <input matInput [appColorPicker]="control.control" [value]="colorPicker.value" readonly="true" required>
+        <input matInput [formControlName]="control.data.key!" [value]="control.control.value" readonly="true" required>
         <div matSuffix class="colorpicker-container">
             <input type="color" [formControlName]="control.data.key!" #colorPicker >
         </div> 

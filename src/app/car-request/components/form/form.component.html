@@ -1,31 +1,68 @@
 <section>
-    <app-header [title]="'New Car Requst'"></app-header>
-    <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
-        
-        <ng-container *ngFor="let control of formStructure.childrens; let i = index">
-            <ng-container *ngIf="control.AsChildrens() else isControl">
-                <ng-container [formGroupName]="control.data.key!">
-                    <div>
-                        <h2>{{ control.data.label | titlecase}}</h2>
-                        <div class="container">
-                            <ng-container *ngFor="let control of control.GetChildrens()">
-                                <app-dynamic-input-loader [control]="control"></app-dynamic-input-loader>
-                            </ng-container>
-                        </div>
-                    </div>
-                </ng-container>
+    <div class="stepper-container">
+        <div class="stepper-headers-container">
+            <h1>{{ 'CarMatch AI' | uppercase }}</h1>
+            <ng-container *ngIf="!isMobile">
+                <br>
+                <hgroup>
+                    <h2>step{{stepper.selectedIndex + 1}}</h2>
+                    <span>{{ stepFromGroup.data.placeholder }}</span>
+                </hgroup>
             </ng-container>
-            <ng-template #isControl>
-                <app-dynamic-input-loader [control]="control"></app-dynamic-input-loader>
-            </ng-template>
-            <mat-divider *ngIf="i < formStructure.childrens.length - 1"></mat-divider>
-        </ng-container>
-    
-        <button 
-        [disabled]="form.invalid"
-        type="submit"
-        mat-raised-button
-        color="primary"
-        > submit </button>
-    </form>
+        </div>
+        <mat-stepper [orientation]="setpperOrientation" [labelPosition]="labelPosition"  [linear]="true" #stepper>
+            <ng-container *ngFor="let control of formStructure.childrens; let i = index">
+                <mat-step [stepControl]="control.control" >
+                    <ng-container *ngIf="!isMobile">
+                            <ng-template matStepLabel>{{ control.data.hint | titlecase}}</ng-template>
+                    </ng-container>
+            </mat-step>
+            </ng-container>
+            
+        </mat-stepper>
+    </div>
+    <div class="form-step-container">
+        <div class="form-step-headers-container">
+            <hgroup>
+                <h2>{{ stepFromGroup.data.label | titlecase}}</h2>
+                <span>{{ stepFromGroup.data.placeholder }}</span>
+            </hgroup>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+            <ng-container [formGroupName]="stepFromGroup.data.key!">
+                <ng-container *ngFor="let child of stepFromGroup.childrens">
+                    <app-dynamic-input-loader [control]="child"></app-dynamic-input-loader>
+                </ng-container>
+                
+            </ng-container>
+        
+            <div class="form-actions-container">
+                <ng-container *ngIf="currentIndex">
+                    <button 
+                        type="button"
+                        mat-raised-button
+                        color="primary"
+                        (click)="prevStep()"
+                    > Back </button>
+                </ng-container>
+                <ng-container *ngIf="currentIndex < formStructure.childrens.length - 1">
+                    <button 
+                        [disabled]="stepFromGroup.control.invalid"
+                        type="button"
+                        mat-raised-button
+                        color="primary"
+                        (click)="nextStep()"
+                    > Next </button>
+                </ng-container>
+                <ng-container *ngIf="currentIndex == formStructure.childrens.length - 1">
+                    <button 
+                        [disabled]="form.invalid"
+                        type="submit"
+                        mat-raised-button
+                        color="primary"
+                    > submit </button>
+                </ng-container>
+            </div>
+        </form>  
+    </div>
 </section>

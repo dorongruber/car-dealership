@@ -13,10 +13,13 @@ import {
     SeatsParams } from "./form-fields-params";
 import { 
     addressLength, 
+    addressRegex, 
     cityLength, 
+    cityRegex, 
     contryLength, 
     fullNameLength, 
-    hobbiesLength} from "./fields-restraints";
+    hobbiesLength,
+    nameRegex} from "./fields-restraints";
 import { 
     addressErrors, 
     birthDateErrors, 
@@ -47,10 +50,17 @@ const nameControl = new CustomControl(
         hint: NameParams.hint,
         componentRef: new CustomComponentRef(TextInputComponent)
     },
-    new CustomValidators([...fullNameErrors.keys()], 
-    [Validators.minLength(fullNameLength.min), Validators.maxLength(fullNameLength.max), Validators.required],
-     [...fullNameErrors.values()]
-     )
+    new CustomValidators(
+        [...fullNameErrors.keys()], 
+    
+        [
+            Validators.minLength(fullNameLength.min), 
+            Validators.maxLength(fullNameLength.max), 
+            Validators.required, 
+            Validators.pattern(nameRegex),
+        ],
+        [...fullNameErrors.values()]
+    )
 );
 
 const birthDateControl = new CustomControl(
@@ -106,8 +116,10 @@ const hobbiesControl = new CustomControl(
 
 const generalInfoGroup = new CustomGroup(
     {
-        key: "user", 
-        label: "user information", 
+        key: "user",
+        placeholder: "Enter your personal information", 
+        label: "your personal information", 
+        hint: "personal information",
         position: 0, 
     },
 );
@@ -129,7 +141,12 @@ const addressControl = new CustomControl(
     },
     new CustomValidators(
         [...addressErrors.keys()], 
-        [ Validators.required, Validators.minLength(addressLength.min), Validators.maxLength(addressLength.max)],
+        [ 
+            Validators.required, 
+            Validators.minLength(addressLength.min), 
+            Validators.maxLength(addressLength.max),
+            Validators.pattern(addressRegex),
+        ],
         [...addressErrors.values()]
      )
 );
@@ -146,7 +163,12 @@ const cityControl = new CustomControl(
     },
     new CustomValidators(
         [...cityErrors.keys()], 
-        [ Validators.required, Validators.minLength(cityLength.min), Validators.maxLength(cityLength.max)],
+        [ 
+            Validators.required, 
+            Validators.minLength(cityLength.min), 
+            Validators.maxLength(cityLength.max),
+            Validators.pattern(cityRegex),
+        ],
         [...cityErrors.values()]
      )
 );
@@ -171,13 +193,16 @@ const contryControl = new CustomControl(
 const locationGroup = new CustomGroup(
     {
         key: "location", 
-        label: "location", 
+        placeholder: "Enter your location information", 
+        label: "your address information ", 
+        hint: "location information",
         position: 0, 
     },
 );
-locationGroup.Add(addressControl);
 locationGroup.Add(cityControl);
 locationGroup.Add(contryControl);
+locationGroup.Add(addressControl);
+
 
 const colorControl = new CustomControl(
     {
@@ -235,7 +260,9 @@ const motorControl = new CustomControl(
 const carGroup = new CustomGroup(
     {
         key: "car", 
-        label: "car preferences", 
+        placeholder: "Enter your car preferences",
+        label: "your car preferences", 
+        hint: "car preferences", 
         position: 0, 
     },
     

@@ -7,6 +7,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
+
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ComponenRefDirective } from './directives/container-ref.directive';
@@ -24,8 +25,8 @@ import { ComponenRefDirective } from './directives/container-ref.directive';
     MatToolbarModule,
     MatDialogModule,
     MatCardModule,
-    MatIconModule,
     MatButtonModule,
+    MatIconModule,
   ],
   exports: [
     HeaderComponent,
@@ -33,8 +34,8 @@ import { ComponenRefDirective } from './directives/container-ref.directive';
     ComponenRefDirective,
     MatDialogModule,
     MatCardModule,
-    MatIconModule,
     MatButtonModule,
+    MatIconModule,
   ]
 })
 export class SharedModule { }

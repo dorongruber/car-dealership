@@ -1,0 +1,21 @@
+section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--app-accent-300);
+}
+
+h1 {
+    font-size: xxx-large;
+    font-weight: 700;
+    color: var(--app-primary-800);
+}
+
+p {
+    font-size: xx-large;
+    font-weight: 700;
+    color: var(--app-primary-900);
+}

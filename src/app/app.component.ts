@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { ChildrenOutletContexts, NavigationEnd, Router } from '@angular/router';
+import { ChildrenOutletContexts } from '@angular/router';
 import { slideInAnimation } from './routing-animations/slide-in-animation';
 import { RouteService } from './shared/services/route.service';
-import { filter, map, takeUntil } from 'rxjs';
-import { SubscriptionContolService } from './shared/services/subscription-control.service';
 
 @Component({
   selector: 'app-root',
